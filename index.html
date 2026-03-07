@@ -16,6 +16,28 @@
         .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
     </style>
 </head>
+<script>
+    // Asli Data Fetch karna
+    async function updateStats() {
+        try {
+            const response = await fetch('http://localhost:5000/api/stats');
+            const data = await response.json();
+            document.querySelector('.display-6').innerText = data.total_wealth;
+        } catch (e) { console.log("AVA Syncing..."); }
+    }
+    setInterval(updateStats, 5000); // Har 5 second mein update
+
+    // Buttons ko clickable banana
+    function showModuleDetail(moduleName) {
+        alert("SAMRAT AVA: Accessing " + moduleName + "... \nExecuting Sovereignty Protocol.");
+    }
+    
+    // Har glass-card par click event lagana
+    document.querySelectorAll('.glass-card').forEach(card => {
+        card.onclick = () => showModuleDetail(card.innerText);
+    });
+</script>
+
 <body>
     <div class="container py-5">
         <header class="text-center mb-5">
