@@ -49,10 +49,12 @@ class MasterLauncher:
         print(">>> Wealth Analytics: CONNECTED TO RAZORPAY")
 
 # --- API ENDPOINTS FOR THE BROWSER DASHBOARD ---
-@app.route('/api/stats')
-def get_live_stats():
-    # Asli data logic (Simulation for initial run)
-    return jsonify({
+# इसे CORS(app) के नीचे लिखें
+@app.after_request
+def add_header(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+({
         "total_wealth": "₹ 1,50,200", 
         "lives_secured": "85,600",
         "nodes_active": "15,420",
