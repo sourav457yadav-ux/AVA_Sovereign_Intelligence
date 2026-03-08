@@ -1,0 +1,16 @@
+name: Validate & Prepare
+on:
+  push:
+    branches:
+      - main
+      - fix/realtime-and-deploy
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure index.html exists
+        run: test -f index.html
+      - name: Ensure API dir exists (if using serverless)
+        run: test -d api || echo "no api directory (ok for static)"
